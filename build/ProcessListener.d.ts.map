@@ -1,0 +1,1 @@
+{"version":3,"file":"ProcessListener.d.ts","sourceRoot":"","sources":["../src/ProcessListener.ts"],"names":[],"mappings":";AACA,OAAO,EAAE,YAAY,EAAE,MAAM,QAAQ,CAAC;AAMtC,qBAAa,eAAgB,SAAQ,YAAY;IAC7C,OAAO,EAAE,OAAO,eAAe,EAAE,8BAA8B,GAAG,IAAI,CAAQ;;IAM9E,OAAO,KAAK,OAAO,GAMlB;IACD,KAAK;IAeL,OAAO,CAAC,YAAY;IAKpB,OAAO,CAAC,YAAY;CAMvB"}
