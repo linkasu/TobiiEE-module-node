@@ -5,7 +5,7 @@ Library for using tobii eye devices with node js
 ## Usage
 
 ```js
-import { TobiiProcess } from "tobiieye";
+import { TobiiProcess } from "TobiiEE-module-node";
 
 const tobii = new TobiiProcess()
 
