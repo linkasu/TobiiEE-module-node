@@ -30,7 +30,7 @@ var TobiiProcess = /** @class */ (function (_super) {
     Object.defineProperty(TobiiProcess.prototype, "binPath", {
         get: function () {
             var binMap = {
-                "win32": path_1.join(__dirname, '/../bin/win/GazePointLogger.exe')
+                "win32": path_1.join(path_1.dirname(__filename), '/../bin/win/GazePointLogger.exe')
             };
             return binMap[os_1.platform()];
         },

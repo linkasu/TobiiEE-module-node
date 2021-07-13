@@ -1,7 +1,7 @@
 import { spawn } from "child_process";
 import { EventEmitter } from "events";
 import { platform } from "os";
-import { join } from "path";
+import { dirname, join } from "path";
 import { GazeData } from "./GazeData";
 
 
@@ -14,7 +14,7 @@ export class TobiiProcess extends EventEmitter {
     }
     private get binPath(): string | null {
         const binMap: { [key in NodeJS.Platform | string]: string } = {
-            "win32": join(__dirname, '/../bin/win/GazePointLogger.exe')
+            "win32": join(dirname(__filename), '/../bin/win/GazePointLogger.exe')
         }
         return binMap[platform()]
 
