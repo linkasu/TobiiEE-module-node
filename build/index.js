@@ -22,15 +22,18 @@ var os_1 = require("os");
 var path_1 = require("path");
 var TobiiProcess = /** @class */ (function (_super) {
     __extends(TobiiProcess, _super);
-    function TobiiProcess() {
+    function TobiiProcess(options) {
         var _this = _super.call(this) || this;
         _this.process = null;
+        _this.options = options;
         return _this;
     }
     Object.defineProperty(TobiiProcess.prototype, "binPath", {
         get: function () {
+            if (this.options && this.options.path)
+                return this.options.path;
             var binMap = {
-                "win32": path_1.join(path_1.dirname(__filename), '/../bin/win/GazePointLogger.exe')
+                win32: path_1.join(path_1.dirname(__filename), "/../bin/win/GazePointLogger.exe"),
             };
             return binMap[os_1.platform()];
         },
@@ -40,28 +43,28 @@ var TobiiProcess = /** @class */ (function (_super) {
     TobiiProcess.prototype.start = function () {
         var _this = this;
         if (this.process) {
-            throw new Error('process already started');
+            throw new Error("process already started");
         }
         if (this.binPath == null) {
-            throw new Error('this platform doesn\'t support');
+            throw new Error("this platform doesn't support");
         }
         this.process = child_process_1.spawn(this.binPath);
-        this.process.stdout.on('data', function (chunk) {
+        this.process.stdout.on("data", function (chunk) {
             _this.chunkHandler(chunk);
         });
-        this.process.on('close', function () {
+        this.process.on("close", function () {
             _this.closeHandler();
         });
     };
     TobiiProcess.prototype.closeHandler = function () {
         this.process = null;
-        this.emit('restart');
+        this.emit("restart");
         this.start();
     };
     TobiiProcess.prototype.chunkHandler = function (chunk) {
         var input = chunk.toString();
-        var _a = input.split(',').map(function (n) { return parseFloat(n); }), x = _a[0], y = _a[1], ts = _a[2];
-        this.emit('point', { x: x, y: y, ts: ts });
+        var _a = input.split(",").map(function (n) { return parseFloat(n); }), x = _a[0], y = _a[1], ts = _a[2];
+        this.emit("point", { x: x, y: y, ts: ts });
     };
     return TobiiProcess;
 }(events_1.EventEmitter));
